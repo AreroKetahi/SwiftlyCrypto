@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swcrypt",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/soyersoyer/SwCrypt",
+      "state" : {
+        "revision" : "d18cf90973a32dc0d28f94eec91faf14ae8b4443",
+        "version" : "5.1.4"
+      }
+    }
+  ],
+  "version" : 2
+}
