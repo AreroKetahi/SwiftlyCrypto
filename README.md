@@ -70,3 +70,62 @@ let raw = RSARawValue(text)
 let signed = try raw.sign(privateKey: privateKey)
 let verifyResult = try signed.verify(message: raw, publicKey: publicKey) // true for success, otherwise false
 ```
+
+## AES
+
+### Generate random Key & IV
+
+```swift
+let randomKey = AES.generateRandomKey()
+let randomIV = AES.generateRandomIV()
+```
+
+### Set your own Key & IV
+
+```swift
+let key = AESKey("password")
+let iv = try AESIV(fromHexString: "12345678901234567890123456789012")
+```
+
+### Encrypt & Decrypt
+
+```swift
+let text = "Hello, world!"
+let raw = AESRawValue(text)
+let encrypted = try raw.encrypt(key: key, iv: iv)
+let decrypted = try encrypted.decrypt(key: key, iv: iv)
+```
+
+### Encrypt with random generation
+
+```swift
+// generate both key and iv
+let raw = AESRawValue("Hello, world!")
+let key = AESKey()
+let iv = AESIV()
+let encrypted = try raw.encrypt(randomKey: &key, randomIV: &iv)
+```
+
+```swift
+// generate key
+let raw = AESRawValue("Hello, world!")
+let key = AESKey()
+let iv = try AESIV(fromHexString: "12345678901234567890123456789012")
+let encrypted = try raw.encrypt(randomKey: &key, iv: iv)
+```
+
+```swift
+// generate iv
+let raw = AESRawValue("Hello, world!")
+let key = AESKey("password")
+let iv = AESIV()
+let encrypted = try raw.encrypt(key: key, randomIV: &iv)
+```
+
+### Check whether the key or IV is empty
+
+```swift
+// true for empty, otherwise false
+key.isEmpty
+iv.isEmpty
+```
