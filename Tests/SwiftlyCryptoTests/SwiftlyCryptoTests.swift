@@ -85,7 +85,7 @@ final class SwiftlyCryptoAESTestsL: XCTestCase {
         XCTAssert(backToKey != nil)
     }
     
-    func testRandomKeyWhileEncrypt() throws {
+    func testRandomKeyIVWhileEncrypt() throws {
         let raw = AESRawValue("Hello, world!")
         var key = AESKey()
         var iv = AESIV()
@@ -96,6 +96,32 @@ final class SwiftlyCryptoAESTestsL: XCTestCase {
         let decrypted = try encrypted.decrypt(key: key, iv: iv)
         XCTAssert(!key.isEmpty)
         XCTAssert(!iv.isEmpty)
+        XCTAssert(raw == decrypted)
+    }
+    
+    func testRandomIVWhileEncrypt() throws {
+        let raw = AESRawValue("Hello, world!")
+        guard let key = AESKey("password") else {
+            fatalError()
+        }
+        var iv = AESIV()
+        XCTAssert(iv.isEmpty)
+        
+        let encrypted = try raw.encrypt(key: key, randomIV: &iv)
+        let decrypted = try encrypted.decrypt(key: key, iv: iv)
+        XCTAssert(!iv.isEmpty)
+        XCTAssert(raw == decrypted)
+    }
+    
+    func testRandomKeyWhileEncrypt() throws {
+        let raw = AESRawValue("Hello, world!")
+        var key = AESKey()
+        var iv = try AES.generateRandomIV()
+        XCTAssert(key.isEmpty)
+        
+        let encrypted = try raw.encrypt(randomKey: &key, iv: iv)
+        let decrypted = try encrypted.decrypt(key: key, iv: iv)
+        XCTAssert(!key.isEmpty)
         XCTAssert(raw == decrypted)
     }
     
