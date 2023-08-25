@@ -62,6 +62,39 @@ final class SwiftlyCryptoRSATests: XCTestCase {
     }
 }
 
+final class SwiftlyCryptoAESTestsL: XCTestCase {
+    func testGenerateRandomKeyIV() throws {
+        let randomKey = try? AES.generateRandomKey()
+        let randomIV = try? AES.generateRandomIV()
+        XCTAssert(randomKey != nil)
+        XCTAssert(randomIV != nil)
+    }
+    
+    func testAESKeyMethods() throws {
+        let password = "password"
+        guard let key1 = AESKey(password) else {
+            fatalError()
+        }
+        let key2 = try AESKey(fromHexString: key1.toHexString())
+        
+        XCTAssert(key1 == key2)
+        
+        let base64Encoded = key1.base64EncodedString()
+        let backToKey = AESKey(base64Encoded: base64Encoded)
+        
+        XCTAssert(backToKey != nil)
+    }
+    
+    func testAESEncrypt() throws {
+        let key = try AES.generateRandomKey()
+        let iv = try AES.generateRandomIV()
+        let raw = AESRawValue("Hello, world!")
+        let encrypted = try raw.encrypt(key: key, iv: iv)
+        let decrypted = try encrypted.decrypt(key: key, iv: iv)
+        XCTAssert(raw == decrypted)
+    }
+}
+
 extension RSAPrivateKey: Equatable {
     public static func == (lhs: RSAPrivateKey, rhs: RSAPrivateKey) -> Bool {
         lhs.rawValue == rhs.rawValue
@@ -70,6 +103,18 @@ extension RSAPrivateKey: Equatable {
 
 extension RSAPublicKey: Equatable {
     public static func == (lhs: RSAPublicKey, rhs: RSAPublicKey) -> Bool {
+        lhs.rawValue == rhs.rawValue
+    }
+}
+
+extension AESKey: Equatable {
+    public static func == (lhs: AESKey, rhs: AESKey) -> Bool {
+        lhs.rawValue == rhs.rawValue
+    }
+}
+
+extension AESRawValue: Equatable {
+    public static func == (lhs: AESRawValue, rhs: AESRawValue) -> Bool {
         lhs.rawValue == rhs.rawValue
     }
 }
