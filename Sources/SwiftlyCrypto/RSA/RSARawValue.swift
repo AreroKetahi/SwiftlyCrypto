@@ -70,7 +70,7 @@ extension RSARawValue {
     /// - Returns: Signed Message
     public func sign(
         privateKey: RSAPrivateKey,
-        padding: CC.RSA.AsymmetricSAPadding = .pkcs15,
+        padding: CC.RSA.AsymmetricSAPadding = .pss,
         digest: CC.DigestAlgorithm = .sha256,
         saltLength: Int = 16
     ) throws -> RSASignature {
@@ -88,7 +88,7 @@ extension RSARawValue {
     public func verify(
         signature: RSASignature,
         publicKey: RSAPublicKey,
-        padding: CC.RSA.AsymmetricSAPadding = .pkcs15,
+        padding: CC.RSA.AsymmetricSAPadding = .pss,
         digest: CC.DigestAlgorithm = .sha256,
         saltLength: Int = 16
     ) throws -> Bool {

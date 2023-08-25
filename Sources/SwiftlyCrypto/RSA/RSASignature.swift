@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwCrypt
 
 struct RSASignature {
     private var data: Data
@@ -41,6 +42,24 @@ extension RSASignature {
 
 // Functions
 extension RSASignature {
+    /// Verify a original message
+    /// - Parameters:
+    ///   - message: Original message that
+    ///   - publicKey: Public Key
+    ///   - padding: Padding Method
+    ///   - digest: Digest algorithm
+    ///   - saltLength: Salt Length
+    /// - Returns: Verify result. `true` for succes, `false` for false
+    public func verify(
+        message: RSARawValue,
+        publicKey: RSAPublicKey,
+        padding: CC.RSA.AsymmetricSAPadding = .pss,
+        digest: CC.DigestAlgorithm = .sha256,
+        saltLength: Int = 16
+    ) throws -> Bool {
+        try RSA.verify(message: message, signature: self, publicKey: publicKey, padding: padding, digest: digest, saltLength: saltLength)
+    }
+    
     /// Return a Base-64 Encoded RSA signature value
     /// - Parameter options: The options to use for the encoding. Default value is `[]`.
     /// - Returns: Base-64 encoded RSA signature value

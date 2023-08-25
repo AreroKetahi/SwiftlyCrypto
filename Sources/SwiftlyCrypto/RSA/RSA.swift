@@ -64,7 +64,7 @@ final class RSA {
     static internal func sign(
         message: RSARawValue,
         privateKey: RSAPrivateKey,
-        padding: CC.RSA.AsymmetricSAPadding = .pkcs15,
+        padding: CC.RSA.AsymmetricSAPadding = .pss,
         digest: CC.DigestAlgorithm = .sha256,
         saltLength: Int = 16
     ) throws -> RSASignature {
@@ -85,7 +85,7 @@ final class RSA {
         message: RSARawValue,
         signature: RSASignature,
         publicKey: RSAPublicKey,
-        padding: CC.RSA.AsymmetricSAPadding = .pkcs15,
+        padding: CC.RSA.AsymmetricSAPadding = .pss,
         digest: CC.DigestAlgorithm = .sha256,
         saltLength: Int = 16
     ) throws -> Bool {
