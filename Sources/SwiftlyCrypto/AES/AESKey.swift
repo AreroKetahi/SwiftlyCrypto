@@ -15,6 +15,12 @@ struct AESKey {
 
 // Initializers
 extension AESKey {
+    /// Generate a empty key
+    /// Use this initializer when performing encryption without a specified key.
+    public init() {
+        self.data = Data()
+    }
+    
     /// Create AES key from raw data
     /// - Parameter data: AES key data
     public init?(_ data: Data) {
@@ -69,6 +75,11 @@ extension AESKey {
 extension AESKey {
     internal var rawValue: Data {
         data
+    }
+    
+    /// A Boolean value indicating whether the Key is empty.
+    public var isEmpty: Bool {
+        self.rawValue.isEmpty
     }
 }
 

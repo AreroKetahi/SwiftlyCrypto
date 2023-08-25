@@ -62,4 +62,24 @@ extension AESRawValue {
     ) throws -> AESEncryptedValue {
         try AES.encrypt(data: self, key: key, iv: iv, blockMode: blockMode, padding: padding)
     }
+    
+    /// Encrypt without defind key and IV
+    /// - Parameters:
+    ///   - randomKey: AES key store
+    ///   - randomIV: AES initialization vector store
+    ///   - keySize: AES key size
+    ///   - blockMode: Block mode, `.cbc` for default
+    ///   - padding: Padding, `.pkcs7Padding` for default
+    /// - Returns: Encrypted value
+    public func encrypt(
+        randomKey: inout AESKey,
+        randomIV: inout AESIV,
+        keySize: Int = 32,
+        blockMode: CC.BlockMode = .cbc,
+        padding: CC.Padding = .pkcs7Padding
+    ) throws -> AESEncryptedValue {
+        randomKey = try AES.generateRandomKey(keySize: keySize)
+        randomIV = try AES.generateRandomIV()
+        return try AES.encrypt(data: self, key: randomKey, iv: randomIV, blockMode: blockMode, padding: padding)
+    }
 }

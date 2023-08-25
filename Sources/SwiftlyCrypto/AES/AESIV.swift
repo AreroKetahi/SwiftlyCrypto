@@ -24,6 +24,11 @@ struct AESIV {
 
 // Initializers
 extension AESIV {
+    /// Generate a empty IV
+    /// Use this initializer when performing encryption without a specified IV.
+    public init() {
+        self.data = Data()
+    }
     
     /// Generate IV from hexadecimal string
     /// - Parameters:
@@ -60,6 +65,10 @@ extension AESIV {
 extension AESIV {
     internal var rawValue: Data {
         data
+    }
+    /// A Boolean value indicating whether the IV is empty.
+    public var isEmpty: Bool {
+        self.rawValue.isEmpty
     }
 }
 
