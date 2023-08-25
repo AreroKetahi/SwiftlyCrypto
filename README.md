@@ -1,7 +1,7 @@
 # SwiftlyCrypto
 
 ![GitHub](https://img.shields.io/github/license/AreroKetahi/SwiftlyCrypto)
-![GitHub release (with filter)](https://img.shields.io/github/v/release/AreroKeathi/SwiftlyCrypto)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/AreroKetahi/SwiftlyCrypto)
 
 ![Static Badge](https://img.shields.io/badge/Swift_Package_Manager-compatible-default?logo=swift&logoColor=white)
 
