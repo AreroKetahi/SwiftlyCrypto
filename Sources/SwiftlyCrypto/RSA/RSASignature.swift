@@ -9,7 +9,7 @@ import Foundation
 import SwCrypt
 
 /// RSA Signature
-struct RSASignature {
+public struct RSASignature {
     private var data: Data
 }
 
