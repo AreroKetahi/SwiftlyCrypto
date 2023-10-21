@@ -8,7 +8,7 @@
 import Foundation
 
 /// AES Initialization Vector
-struct AESIV {
+public struct AESIV {
     private var data: Data
     
     /// Generate IV from raw data

@@ -9,7 +9,7 @@ import Foundation
 import SwCrypt
 
 /// RSA Public Key
-struct RSAPublicKey {
+public struct RSAPublicKey {
     private var data: Data
 }
 

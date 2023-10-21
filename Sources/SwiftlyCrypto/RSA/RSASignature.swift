@@ -8,6 +8,7 @@
 import Foundation
 import SwCrypt
 
+/// RSA Signature
 struct RSASignature {
     private var data: Data
 }

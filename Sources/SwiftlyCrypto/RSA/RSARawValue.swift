@@ -9,7 +9,7 @@ import Foundation
 import SwCrypt
 
 /// RSA Raw Value
-struct RSARawValue {
+public struct RSARawValue {
     private var data: Data
 }
 

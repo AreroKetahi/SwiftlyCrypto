@@ -9,7 +9,7 @@ import Foundation
 import SwCrypt
 
 /// Advanced Encryption Standard
-final class AES {
+public final class AES {
     internal static func encrypt(
         data: AESRawValue,
         key: AESKey,

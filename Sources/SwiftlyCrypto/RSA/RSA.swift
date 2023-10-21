@@ -10,7 +10,7 @@ import SwCrypt
 
 /// RSA Asymmetric Encryption
 /// Encapsulated from SwCrypt
-final class RSA {
+public final class RSA {
     /// Generate a key pair
     /// - Parameter keySize: Key size, default as `4096`
     /// - Returns: private key and public key (in order)

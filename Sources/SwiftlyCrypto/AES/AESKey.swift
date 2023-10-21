@@ -9,7 +9,7 @@ import Foundation
 import SwCrypt
 
 /// AES Key
-struct AESKey {
+public struct AESKey {
     private var data: Data
 }
 
